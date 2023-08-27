@@ -1,19 +1,10 @@
 ---
-import '../styles/base.css'
-import Technologies from "./Technologies.astro";
-import {
-	IconSun,
-	IconGithub,
-	IconAstro,
-	IconUser,
-	IconBlog,
-	IconHome,
-} from "../components/icons";
-import RoundIconButton from "./RoundIconButton.astro";
+import "../styles/base.css";
+import { IconUser, IconHome } from "../components/icons";
 import SquareIconLink from "./SquareIconLink.astro";
 
 export interface Props {
-	title: string;
+    title: string;
 }
 
 const { title } = Astro.props as Props;
@@ -21,55 +12,83 @@ const { title } = Astro.props as Props;
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<title>{title}</title>
-	</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <title>{title}</title>
+    </head>
 
-	<body
-		class="flex flex-col items-center justify-center relative box-border min-h-screen lg:overflow-hidden bg-light-primary dark:bg-gradient-main-dark"
-	>
-		<main
-			class="flex flex-col p-4 m-4 md:p-8 md:my-10 md:mx-12 lg:my-0 w-fit lg:w-[calc(100vw_-_50%)] rounded-tr-2xl rounded-tl-lg rounded-b-lg bg-gradient-box-light shadow-sky-light dark:bg-box-dark dark:shadow-orange-dark min-h-[calc(100vh_-_80px)] lg:h-[calc(100vh_-_100px)] justify-between"
-		>
-			<div class="flex w-full relative mb-2 md:mb-4">
-				<div class="flex w-15 -top-5 sm:top-0 sm:w-fit absolute">
-					<img class="h-16 w-16 md:h-20 md:w-20 mt-4 md:mt-0" src="/starshiplogo.png" />
-				</div>
-				<div
-					class="flex flex-col self-end text-right ml-auto text-3xl w-fit text-light-blue-dark dark:text-dark-blue-light"
-				>
-					<h1 class="font-black leading-extra-loose  md:text-3xl 2xl:text-4xl">
-						Starship
-					</h1>
-					<h1 class="font-thin leading-extra-loose text-3xl md:text-2xl 2xl:text-4xl">
-						Shield
-					</h1>
-				</div>
+    <body
+        class="flex flex-col items-center justify-center relative box-border min-h-screen lg:overflow-hidden bg-light-primary dark:bg-gradient-main-dark"
+    >
+        <main
+            class="flex flex-col p-4 m-4 md:p-8 md:my-10 md:mx-12 lg:my-0 w-fit lg:w-[calc(100vw_-_50%)] rounded-tr-2xl rounded-tl-lg rounded-b-lg bg-gradient-box-light shadow-purple min-h-[calc(100vh_-_80px)] lg:h-[calc(100vh_-_100px)] justify-between"
+        >
+            <div class="flex w-full relative mb-2 md:mb-4">
+                <div class="flex w-15 -top-5 sm:top-0 sm:w-fit absolute">
+                    <img
+                        class="h-16 w-16 md:h-20 md:w-20 mt-4 md:mt-0"
+                        src="/starshiplogo.png"
+                    />
+                </div>
+                <div
+                    class="flex flex-col self-end text-right ml-auto text-3xl w-fit text-light-blue-dark dark:text-dark-blue-light"
+                >
+                    <h1
+                        class="font-black leading-extra-loose md:text-3xl 2xl:text-4xl"
+                    >
+                        Starship
+                    </h1>
+                    <h1
+                        class="font-thin leading-extra-loose text-3xl md:text-2xl 2xl:text-4xl"
+                    >
+                        Shield
+                    </h1>
+                </div>
+                <div
+                    class="flex w-fit h-fit px-1.25 py-1.25 ml-4 2xl:ml-8 shadow-switcher rounded-2xl dark:bg-buttons-box-dark dark:shadow-box-dark-out"
+                >
+                    <div
+                        class="dark:shadow-buttons-box-dark rounded-2xl w-min flex sm:w-full px-1.5 py-1.5 md:px-3 md:py-3 h-fit"
+                    >
+                        <SquareIconLink
+                            title="Link to Startship Shield Home Page"
+                            href="https://www.starshipshield.com/"
+                            target="_blank"
+                        >
+                            <IconHome />
+                        </SquareIconLink>
+                        <span class="mr-4"></span>
+                        <SquareIconLink
+                            title="Link to Idel Hooligans: Club Fights"
+                            href="https://play.google.com/store/apps/details?id=com.ooxcit.hooligans"
+                            target="_blank"
+                        >
+                            <IconUser />
+                        </SquareIconLink>
+                    </div>
+                </div>
+            </div>
+            <slot />
+        </main>
 
-			</div>
-			<slot />
+        <script is:inline>
+            const toggleTheme = () => {
+                document.documentElement.classList.toggle("dark");
+                localStorage.theme =
+                    document.documentElement.classList.contains("dark")
+                        ? "dark"
+                        : "light";
+            };
 
-			
-		</main>
+            window.toggleTheme = toggleTheme;
 
-		<script is:inline>
-			const toggleTheme = () => {
-				document.documentElement.classList.toggle("dark");
-				localStorage.theme = document.documentElement.classList.contains("dark")
-					? "dark"
-					: "light";
-			};
-
-			window.toggleTheme = toggleTheme;
-
-			if (localStorage.theme === "dark") {
-				document.documentElement.classList.add("dark");
-			} else {
-				document.documentElement.classList.remove("dark");
-			}
-		</script>
-	</body>
+            if (localStorage.theme === "dark") {
+                document.documentElement.classList.add("dark");
+            } else {
+                document.documentElement.classList.remove("dark");
+            }
+        </script>
+    </body>
 </html>
